@@ -1,7 +1,8 @@
-package com.marcsedev.horoscoapp
+package com.marcsedev.horoscoapp.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.marcsedev.horoscoapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
