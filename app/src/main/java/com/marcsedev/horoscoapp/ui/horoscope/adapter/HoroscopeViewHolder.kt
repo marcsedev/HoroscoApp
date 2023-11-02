@@ -4,7 +4,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.marcsedev.horoscoapp.databinding.ItemHoroscopeBinding
-import com.marcsedev.horoscoapp.domain.moel.HoroscopeInfo
+import com.marcsedev.horoscoapp.domain.model.HoroscopeInfo
 
 class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

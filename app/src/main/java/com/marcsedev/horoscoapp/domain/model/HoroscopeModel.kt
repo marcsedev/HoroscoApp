@@ -1,6 +1,4 @@
-package com.marcsedev.horoscoapp.domain.moel
-
-import com.marcsedev.horoscoapp.R
+package com.marcsedev.horoscoapp.domain.model
 
 enum class HoroscopeModel {
     Aries,

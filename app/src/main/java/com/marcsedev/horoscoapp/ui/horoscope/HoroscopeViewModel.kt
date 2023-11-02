@@ -2,8 +2,7 @@ package com.marcsedev.horoscoapp.ui.horoscope
 
 import androidx.lifecycle.ViewModel
 import com.marcsedev.horoscoapp.data.providers.HoroscopeProvider
-import com.marcsedev.horoscoapp.domain.moel.HoroscopeInfo
-import com.marcsedev.horoscoapp.domain.moel.HoroscopeInfo.*
+import com.marcsedev.horoscoapp.domain.model.HoroscopeInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

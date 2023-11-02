@@ -1,4 +1,4 @@
-package com.marcsedev.horoscoapp.domain.moel
+package com.marcsedev.horoscoapp.domain.model
 
 import com.marcsedev.horoscoapp.R
 
