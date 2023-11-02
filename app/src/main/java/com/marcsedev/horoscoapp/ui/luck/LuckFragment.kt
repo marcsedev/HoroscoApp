@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.marcsedev.horoscoapp.R
 import com.marcsedev.horoscoapp.databinding.FragmentHoroscopeBinding
 import com.marcsedev.horoscoapp.databinding.FragmentLuckBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LuckFragment : Fragment() {
 
     private var _binding: FragmentLuckBinding? = null
