@@ -1,13 +1,14 @@
 package com.marcsedev.horoscoapp.ui.luck
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
@@ -15,8 +16,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.marcsedev.horoscoapp.R
 import com.marcsedev.horoscoapp.databinding.FragmentLuckBinding
+import com.marcsedev.horoscoapp.ui.core.listeners.OnSwipeTouchListener
+import com.marcsedev.horoscoapp.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LuckFragment : Fragment() {
@@ -24,21 +28,57 @@ class LuckFragment : Fragment() {
     private var _binding: FragmentLuckBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var randomCardProvider: RandomCardProvider
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
     }
 
     private fun initUI() {
+        preparePrediction()
         initListeners()
     }
 
+    private fun preparePrediction() {
+        val currentLuck = randomCardProvider.getLucky()
+        currentLuck?.let {luck ->
+            val currentPrediction = getString(luck.text)
+            binding.tvLucky.text = currentPrediction
+            binding.ivLuckyCard.setImageResource(luck.image)
+            binding.tvShare.setOnClickListener { shareResult(currentPrediction) }
+        }
+    }
+
+    private fun shareResult(prediction:String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
-        binding.ivRoulette.setOnClickListener { spinRoulette() }
+//        binding.ivRoulette.setOnClickListener { spinRoulette() }
+
+        binding.ivRoulette.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+
+            override fun onSwipeRight() {
+                spinRoulette()
+            }
+
+            override fun onSwipeLeft() {
+                spinRoulette()
+            }
+        })
     }
 
     private fun spinRoulette() {
-
         val random = Random()
         val degrees = random.nextInt(1440) + 360
 
@@ -63,6 +103,7 @@ class LuckFragment : Fragment() {
             }
 
             override fun onAnimationRepeat(p0: Animation?) {}
+
         })
 
         binding.reverse.startAnimation(slideUpAnimation)
@@ -71,7 +112,7 @@ class LuckFragment : Fragment() {
     private fun growCard() {
         val growAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.grow)
 
-        growAnimation.setAnimationListener(object : Animation.AnimationListener {
+        growAnimation.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationStart(p0: Animation?) {}
 
             override fun onAnimationEnd(p0: Animation?) {
@@ -80,11 +121,10 @@ class LuckFragment : Fragment() {
             }
 
             override fun onAnimationRepeat(p0: Animation?) {}
+
         })
 
         binding.reverse.startAnimation(growAnimation)
-
-
     }
 
     private fun showPremonitionView() {
@@ -92,9 +132,9 @@ class LuckFragment : Fragment() {
         disappearAnimation.duration = 200
 
         val appearAnimation = AlphaAnimation(0.0f, 1.0f)
-        disappearAnimation.duration = 1000
+        appearAnimation.duration = 1000
 
-        disappearAnimation.setAnimationListener(object : AnimationListener {
+        disappearAnimation.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationStart(p0: Animation?) {}
 
             override fun onAnimationEnd(p0: Animation?) {
@@ -102,10 +142,10 @@ class LuckFragment : Fragment() {
                 binding.prediction.isVisible = true
             }
 
-            override fun onAnimationRepeat(p0: Animation?) {
-                TODO("Not yet implemented")
-            }
+            override fun onAnimationRepeat(p0: Animation?) {}
+
         })
+
 
         binding.preview.startAnimation(disappearAnimation)
         binding.prediction.startAnimation(appearAnimation)
@@ -118,5 +158,10 @@ class LuckFragment : Fragment() {
     ): View {
         _binding = FragmentLuckBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
