@@ -66,26 +66,29 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     val navVersion = "2.7.1"
+    val cameraVersion = "1.2.3"
+    val retrofitVersion = "2.9.0"
+    val hiltVersion = "2.48"
 
     //NavComponent
     implementation ("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation ("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     //DaggerHilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.3.1")
 
     //Camera X
-    /*implementation ("androidx.camera:camera-core:${cameraVersion}")
+    implementation ("androidx.camera:camera-core:${cameraVersion}")
     implementation ("androidx.camera:camera-camera2:${cameraVersion}")
     implementation ("androidx.camera:camera-lifecycle:${cameraVersion}")
     implementation ("androidx.camera:camera-view:${cameraVersion}")
-    implementation ("androidx.camera:camera-extensions:${cameraVersion}")*/
+    implementation ("androidx.camera:camera-extensions:${cameraVersion}")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
