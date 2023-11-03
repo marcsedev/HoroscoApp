@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_luck" />
     <fragment
         android:id="@+id/palmistryFragment"
-        android:name="com.marcsedev.horoscoapp.ui.Palmistry.PalmistryFragment"
+        android:name="com.marcsedev.horoscoapp.ui.palmistry.PalmistryFragment"
         android:label="fragment_palmistry"
         tools:layout="@layout/fragment_palmistry" />
     <activity
