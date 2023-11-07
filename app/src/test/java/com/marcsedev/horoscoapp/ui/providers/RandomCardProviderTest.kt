@@ -1,6 +1,7 @@
 package com.marcsedev.horoscoapp.ui.providers
 
 import com.marcsedev.horoscoapp.motherobject.HoroscopeMotherObject
+import com.marcsedev.horoscoapp.ui.providers.RandomCardProvider
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

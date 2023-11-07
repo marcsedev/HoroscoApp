@@ -2,13 +2,14 @@ package com.marcsedev.horoscoapp.ui.horoscope
 
 import com.marcsedev.horoscoapp.data.providers.HoroscopeProvider
 import com.marcsedev.horoscoapp.motherobject.HoroscopeMotherObject.horoscopeInfoList
-import io.mockk.MockKAdditionalAnswerScope
+import io.kotlintest.inspectors.forExactly
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.verify
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
 
 class HoroscopeViewModelTest {
 
